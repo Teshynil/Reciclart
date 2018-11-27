@@ -1,0 +1,40 @@
+<div class="row">
+  <div class="col s12 m2 l4">
+  </div>
+  <div class="col s12 m8 l4">
+    <div class="card">
+      <div class="card-title section center-align">
+        <i class="material-icons">power_settings_new</i>
+        Iniciar Sesión
+      </div>
+      <div class="card-content">
+        <form ngNoForm (submit)="submit()">
+          <div class="input-field">
+            <input type="text" id="title" required [(ngModel)]="email" name="email">
+            <label for="title">Correo</label>
+          </div>
+          <div class="input-field">
+            <input id="password" type="password" required [(ngModel)]="password" name="password">
+            <label for="password">Contraseña</label>
+          </div>
+          <div class="input-field col s12">
+              <select required [(ngModel)]="tipo" name="tipo">
+                  <option value="" disabled selected>Iniciar como:</option>
+                  <option value="enterprise">Empresa</option>
+                  <option value="office">Oficina</option>
+                  <option value="center">Centro de recoleccion</option>
+                </select>
+          </div>
+          <div class="input-field">
+            <input class="btn waves-effect waves-light" type="submit" value="Iniciar Sesión"/>
+          </div>
+        </form>
+      </div>
+      <div class="card-action right-align">
+          <span (click)="forgotPass()" class="orange-text" style="cursor: pointer">Olvidaste tu Contraseña?</span>
+      </div>
+    </div>
+  </div>
+  <div class="col s12 m2 l4">
+  </div>
+</div>

@@ -1,0 +1,11 @@
+<ul id="side-menu" class="sidenav">
+  <li><div class="user-view">
+    <div class="background teal">
+    </div>
+    <span>Bienvenido</span>
+  </div></li>
+  <li *ngFor="let item of items">
+    <a><app-side-menu-item [ruta]="item.ruta" [icon]="item.icon" [elemento]="item.elemento"></app-side-menu-item></a>
+  </li>
+</ul>
+
