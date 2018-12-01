@@ -39,7 +39,17 @@ export class LoginComponent implements OnInit {
                 .subscribe(
                     () => {
                         console.log("User is logged in");
-                        window.location.href="/main";
+                        switch (this.authService.getTipo()) {
+                          case "enterprise":
+                          window.location.href="/main";
+                            break;
+                          case "office":
+                          window.location.href="/office/main";
+                            break;
+                          case "center":
+                            window.location.href="/center/main";
+                            break;
+                        }
                     },error =>{
                       M.toast({html: 'Usuario o contraseña invalida'});
                     }

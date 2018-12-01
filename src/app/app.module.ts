@@ -16,6 +16,11 @@ import { APIService } from "./api.service";
 import { OfficesViewComponent } from './offices-view/offices-view.component';
 import { TransactionsViewComponent } from './transactions-view/transactions-view.component';
 import { TableRowComponent } from './table-row/table-row.component';
+import { OfficeDetailComponent } from './office-detail/office-detail.component';
+import { MainComponent } from './centers/main/main.component';
+import { PurchaseComponent } from './centers/purchase/purchase.component';
+import { MaterialsComponent } from './centers/materials/materials.component';
+import { TransactionsComponent } from './centers/transactions/transactions.component';
 
 const routes: Routes = [
   {
@@ -37,6 +42,22 @@ const routes: Routes = [
   {
     path: 'offices',
     component: OfficesViewComponent
+  },
+  {
+    path: 'center/main',
+    component: MainComponent
+  },
+  {
+    path: 'center/purchase',
+    component: PurchaseComponent
+  },
+  {
+    path: 'center/materials',
+    component: MaterialsComponent
+  },
+  {
+    path: 'center/transactions',
+    component: TransactionsComponent
   }
 ];
 export const routing = RouterModule.forRoot(routes);
@@ -50,7 +71,12 @@ export const routing = RouterModule.forRoot(routes);
     SideMenuItemComponent,
     OfficesViewComponent,
     TransactionsViewComponent,
-    TableRowComponent
+    TableRowComponent,
+    OfficeDetailComponent,
+    MainComponent,
+    PurchaseComponent,
+    MaterialsComponent,
+    TransactionsComponent
   ],
   imports: [
     BrowserModule,

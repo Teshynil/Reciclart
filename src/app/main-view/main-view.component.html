@@ -1,14 +1,11 @@
 <app-top-bar></app-top-bar>
 <app-side-menu></app-side-menu>
 
-<body>
     <div class="container">
             <div class="row">
                 <div class="col s3 offset-s9 red darken-2"><span class="flow-text" align="left">Total: $370.00</span></div>
             </div>
-            {{transacciones}}
-            {{test}}
-            <table class="highlight">
+            <table class="highlight striped">
                 <thead>
                     <tr>
                         <th>Producto</th>
@@ -16,25 +13,12 @@
                         <th>Transacción</th>
                     </tr>
                 </thead>
-                    
                 <tbody>
-                    <tr>
-                        <td>Detergente Ace 1 kg</td>
-                        <td>3</td>
-                        <td>$61</td>
-                    </tr>
-                    {{transacciones.toString()}}
-                    <tr *ngFor="let item of transacciones">
-                        <app-table-row [contenido]="item.item.name"></app-table-row>
-                        <app-table-row [contenido]="item.quantity"></app-table-row>
-                        <app-table-row [contenido]="item.getTotal()"></app-table-row>
-                    </tr>
                     <tr *ngFor="let itx of transacciones">
                         <td>{{itx.item.name}}</td>
                         <td>{{itx.quantity}}</td>
-                        <td>{{itx.quantity}}</td>
+                        <td>$ {{itx.getTotal()}}</td>
                     </tr>
                 </tbody>
             </table>
         </div>
-</body>
