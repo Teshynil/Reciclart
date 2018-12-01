@@ -8,7 +8,6 @@ import { AppComponent } from './app.component';
 import { SideMenuComponent } from './side-menu/side-menu.component';
 import { TopBarComponent } from './top-bar/top-bar.component';
 import { LoginComponent } from './login/login.component';
-import { DashboardComponent } from './dashboard/dashboard.component';
 import { AuthService } from './auth-service.service';
 import { AuthInterceptor } from './auth-interceptor.service';
 import { MainViewComponent } from './main-view/main-view.component';
@@ -38,7 +37,6 @@ export const routing = RouterModule.forRoot(routes);
     SideMenuComponent,
     TopBarComponent,
     LoginComponent,
-    DashboardComponent,
     MainViewComponent,
     SideMenuItemComponent,
     OfficesViewComponent,
