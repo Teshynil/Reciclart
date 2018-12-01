@@ -10,8 +10,11 @@ export class AuthService {
     }
 
     login(email:string, password:string,tipo:string) {
-        return this.http.post<any>("https://reciclarte-api.azurewebsites.net/api/account/"+tipo+"/login", {email, password},)
-            .pipe(map(res => this.setSession(res,tipo)))
+        var result = this.http.post<any>("https://reciclarte-api.azurewebsites.net/api/account/"+tipo+"/login", {email, password});
+        return result.pipe(map(
+                res => this.setSession(res,tipo)
+            )
+        );
     }
           
     private setSession(authResult,tipo) {

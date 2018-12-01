@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../auth-service.service';
 import { Router } from '@angular/router';
+import { error } from '@angular/compiler/src/util';
 declare var M:any;
 declare var mzbox:any;
 @Component({
@@ -15,6 +16,7 @@ export class LoginComponent implements OnInit {
   constructor(private authService:AuthService, private router:Router) {
     if(this.authService.isLoggedIn()){
       this.router.navigate(['/main']);
+      return;
     }
     document.getElementsByTagName("body")[0].setAttribute("class","teal");
     this.email="";
@@ -38,9 +40,10 @@ export class LoginComponent implements OnInit {
                     () => {
                         console.log("User is logged in");
                         window.location.href="/main";
+                    },error =>{
+                      M.toast({html: 'Usuario o contraseña invalida'});
                     }
                 );
-    M.toast({html: 'Usuario o contraseña invalida'});
     return false;
   }
 }
