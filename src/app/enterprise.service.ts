@@ -9,7 +9,7 @@ export class EnterpriseService {
   getMyEnterprise() {
     return this.http.get("https://reciclarte-api.azurewebsites.net/api/enterprises/myenterprise")
     .subscribe(
-      result=>this.result=result.json()
+      //result=>this.result=result.json()
       );
   }
   getOffices() {
