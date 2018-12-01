@@ -20,7 +20,7 @@ export class SideMenuComponent implements OnInit {
       case "enterprise":
         this.items.push({ruta:base+"/main",icon:"home",elemento:"Inicio"});
         this.items.push({ruta:base+"/offices",icon:"settings",elemento:"Oficinas"});
-        this.items.push({ruta:base+"/main",icon:"people",elemento:"Transacciones"});
+        this.items.push({ruta:base+"/transactions",icon:"people",elemento:"Transacciones"});
         break;
       case "office":
         

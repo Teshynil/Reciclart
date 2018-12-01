@@ -1,9 +1,11 @@
 import { Item } from "./item";
 
 export class Transaction {
-    id:string;
+    id:number;
     quantity:number;
     item:Item;
+    itemId: number;
+    transaction: number;
 
     /**
      * getTotal

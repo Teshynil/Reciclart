@@ -1,3 +1,26 @@
-<p>
-  transactions-view works!
-</p>
+<app-top-bar></app-top-bar>
+<app-side-menu></app-side-menu>
+<table class="centered responsive-table" >
+<!--</table>*ngFor="let transaction of transactions">-->
+  <thead>
+    <tr>
+      <th>Nombre</th>
+      <th>Cantidad</th>
+      <th>Precio</th>
+    </tr>
+  </thead>
+  <tbody>
+    <!--
+    <tr>
+      <td>{{transaction.item.name}}</td>
+      <td>{{transaction.quantity}}.</td>
+      <td>{{transaction.item.price}}</td>
+    </tr>
+  -->
+    <tr>
+      <td>[transaction.item.name]</td>
+      <td>[transaction.quantity]</td>
+      <td>[transaction.item.price]</td>
+    </tr>
+  </tbody>
+</table>

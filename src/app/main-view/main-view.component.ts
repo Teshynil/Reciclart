@@ -14,8 +14,9 @@ import { plainToClass,classToPlain } from "class-transformer";
   styleUrls: ['./main-view.component.css']
 })
 export class MainViewComponent implements OnInit {
-  transaciones:object;
+  transacciones: any;
   test:any;
+  total : number = 0;
   constructor(private authService:AuthService,private router:Router,private api:APIService) {
     if(!this.authService.isLoggedIn()){
       this.router.navigate(['/login']);
@@ -23,13 +24,20 @@ export class MainViewComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.api.getTransactions().subscribe(res=>{
-      this.setTransactions(res);
+    this.api.getTransactions().subscribe(result => {
+      this.transacciones = result;
+      console.log(result);
+      for(let trans of this.transacciones ){
+        this.total += trans.getTotal();
+      }
+    },
+      error => {
+        console.log(<any>error);
       }
     );
   }
   setTransactions(value){
-    this.transaciones=value;
+    this.transacciones=value;
   }
 
 }

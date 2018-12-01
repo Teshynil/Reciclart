@@ -29,6 +29,14 @@ const routes: Routes = [
   {
     path: 'main',
     component: MainViewComponent
+  },
+  {
+    path: 'transactions',
+    component: TransactionsViewComponent
+  },
+  {
+    path: 'offices',
+    component: OfficesViewComponent
   }
 ];
 export const routing = RouterModule.forRoot(routes);
