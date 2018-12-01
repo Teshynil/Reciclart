@@ -32,7 +32,7 @@ export class APIService {
   getTransactions() {
     return this.http.get("https://reciclarte-api.azurewebsites.net/api/enterprises/myenterprise/transactions")
     .pipe(
-      map((res) => plainToClass(Transaction, res))
+      map((res) => plainToClass(Transaction, res as Object[]))
     );
   }
 }

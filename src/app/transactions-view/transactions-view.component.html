@@ -1,7 +1,7 @@
 <app-top-bar></app-top-bar>
 <app-side-menu></app-side-menu>
 <table class="centered responsive-table" >
-<!--</table>*ngFor="let transaction of transactions">-->
+<table>
   <thead>
     <tr>
       <th>Nombre</th>
@@ -10,17 +10,10 @@
     </tr>
   </thead>
   <tbody>
-    <!--
-    <tr>
+    <tr *ngFor="let transaction of transactions">
       <td>{{transaction.item.name}}</td>
       <td>{{transaction.quantity}}.</td>
       <td>{{transaction.item.price}}</td>
-    </tr>
-  -->
-    <tr>
-      <td>[transaction.item.name]</td>
-      <td>[transaction.quantity]</td>
-      <td>[transaction.item.price]</td>
     </tr>
   </tbody>
 </table>
