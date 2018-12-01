@@ -19,9 +19,8 @@ export class SideMenuComponent implements OnInit {
     switch (authService.getTipo()) {
       case "enterprise":
         this.items.push({ruta:base+"/main",icon:"home",elemento:"Inicio"});
-        this.items.push({ruta:base+"/offices",icon:"settings",elemento:"Configuracion"});
-        this.items.push({ruta:base+"/main",icon:"people",elemento:"Usuarios"});
-        this.items.push({ruta:base+"/main",icon:"",elemento:"Prueba"});
+        this.items.push({ruta:base+"/offices",icon:"settings",elemento:"Oficinas"});
+        this.items.push({ruta:base+"/main",icon:"people",elemento:"Transacciones"});
         break;
       case "office":
         

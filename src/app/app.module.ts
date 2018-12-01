@@ -14,6 +14,8 @@ import { AuthInterceptor } from './auth-interceptor.service';
 import { MainViewComponent } from './main-view/main-view.component';
 import { SideMenuItemComponent } from './side-menu-item/side-menu-item.component';
 import { EnterpriseService } from "./enterprise.service";
+import { OfficesViewComponent } from './offices-view/offices-view.component';
+import { TransactionsViewComponent } from './transactions-view/transactions-view.component';
 
 const routes: Routes = [
   {
@@ -38,7 +40,9 @@ export const routing = RouterModule.forRoot(routes);
     LoginComponent,
     DashboardComponent,
     MainViewComponent,
-    SideMenuItemComponent
+    SideMenuItemComponent,
+    OfficesViewComponent,
+    TransactionsViewComponent
   ],
   imports: [
     BrowserModule,

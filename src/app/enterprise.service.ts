@@ -7,8 +7,10 @@ export class EnterpriseService {
   constructor(private http: HttpClient) {
   }
   getMyEnterprise() {
-    var enterprise;
-    this.http.get("https://reciclarte-api.azurewebsites.net/api/enterprises/myenterprise").subscribe((res:Response)=>enterprise=res.json());
+    return this.http.get("https://reciclarte-api.azurewebsites.net/api/enterprises/myenterprise")
+    .subscribe(
+      result=>this.result=result.json()
+      );
   }
   getOffices() {
     return this.http.get("https://reciclarte-api.azurewebsites.net/api/enterprises/myenterprise/offices");
