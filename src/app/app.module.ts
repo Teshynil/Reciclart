@@ -12,9 +12,10 @@ import { AuthService } from './auth-service.service';
 import { AuthInterceptor } from './auth-interceptor.service';
 import { MainViewComponent } from './main-view/main-view.component';
 import { SideMenuItemComponent } from './side-menu-item/side-menu-item.component';
-import { EnterpriseService } from "./enterprise.service";
+import { APIService } from "./api.service";
 import { OfficesViewComponent } from './offices-view/offices-view.component';
 import { TransactionsViewComponent } from './transactions-view/transactions-view.component';
+import { TableRowComponent } from './table-row/table-row.component';
 
 const routes: Routes = [
   {
@@ -40,7 +41,8 @@ export const routing = RouterModule.forRoot(routes);
     MainViewComponent,
     SideMenuItemComponent,
     OfficesViewComponent,
-    TransactionsViewComponent
+    TransactionsViewComponent,
+    TableRowComponent
   ],
   imports: [
     BrowserModule,
@@ -53,7 +55,7 @@ export const routing = RouterModule.forRoot(routes);
     {provide: HTTP_INTERCEPTORS,
       useClass: AuthInterceptor,
       multi: true},
-    EnterpriseService
+    APIService
   ],
   bootstrap: [AppComponent]
 })
