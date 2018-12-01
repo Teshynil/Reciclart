@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-
+declare var M:any;
 @Component({
   selector: 'app-purchase',
   templateUrl: './purchase.component.html',
@@ -7,9 +7,15 @@ import { Component, OnInit } from '@angular/core';
 })
 export class PurchaseComponent implements OnInit {
 
-  constructor() { }
+  constructor() {
+    document.addEventListener('DOMContentLoaded', function() {
+      var elems = document.querySelectorAll('select');
+      var instances = M.FormSelect.init(elems);
+    });
+  }
 
   ngOnInit() {
   }
 
 }
+
