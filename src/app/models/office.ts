@@ -7,4 +7,5 @@ export class Office {
     point:object[];
     @Type(() => Item)
     items:Item[];
+    address : object[];
 }
