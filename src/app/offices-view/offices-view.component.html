@@ -1,42 +1,212 @@
 <app-top-bar></app-top-bar>
 <app-side-menu></app-side-menu>
-<table class="centered responsive-table">
-  <!--</table>*ngFor="let office of offices">-->
-  <thead>
-    <tr>
-      <th>Nombre</th>
-      <th>Cantidad</th>
-      <th>Precio</th>
-      <th>Acción</th>
-    </tr>
-  </thead>
-  <tbody>
-    <!--
-    <tr>
-      <td>{{transaction.item.name}}</td>
-      <td>{{transaction.quantity}}.</td>
-      <td>{{transaction.item.price}}</td>
-    </tr>
-  -->
-    <tr>
-      <td>[transaction.item.name]</td>
-      <td>[transaction.quantity]</td>
-      <td>[transaction.item.price]</td>
-      <td>
-        <a class="waves-effect waves-light  btn-floating blue"><i class="material-icons">visibility</i></a>
-        <a class="waves-effect waves-light  btn-floating orange"><i class="material-icons">edit</i></a>
-        <a class="waves-effect waves-light  btn-floating red"><i class="material-icons">delete</i></a>
-      </td>
-    </tr>
-  </tbody>
-</table>
+<div class="container">
+  <table class="highlight centered responsive-table">
+    <thead>
+      <tr>
+      <th>#</th>
+      <th>Horario</th>
+      <th>Coordenada</th>
+      <th>Dirección</th>
+      </tr>
+    </thead>
+
+    <tbody *ngFor="let office of offices, let i=index">
+      <tr>
+        <td>{{i + 1}}</td>
+        <td>
+            <table>
+              <thead>
+                <tr>
+                  <th>Lunes</th>
+                  <th>Martes</th>
+                  <th>Miércoles</th>
+                  <th>Jueves</th>
+                  <th>Viernes</th>
+                  <th>Sábado</th>
+                  <th>Domingo</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>{{office.schedule.lu}}</td>
+                  <td>{{office.schedule.ma}}</td>
+                  <td>{{office.schedule.mi}}</td>
+                  <td>{{office.schedule.ju}}</td>
+                  <td>{{office.schedule.vi}}</td>
+                  <td>{{office.schedule.sa}}</td>
+                  <td>{{office.schedule.do}}</td>
+                </tr>
+              </tbody>
+            </table> 
+        </td>
+        <td>({{office.point.lat}} , {{office.point.long}})</td>
+        <td>
+          <tr style="border-bottom : none !important;">
+            <td>{{office.address.township}}</td>
+            <td>{{office.address.city}}</td>
+            <td>{{office.address.pc}}</td>
+            <td>{{office.address.street}}</td>
+            <td>{{office.address.number}}</td>
+          </tr>
+        </td>
+        <td>
+          <a class="waves-effect waves-light  btn-floating blue"><i class="material-icons">visibility</i></a>
+          <a class="waves-effect waves-light  btn-floating orange"><i class="material-icons">edit</i></a>
+          <a class="waves-effect waves-light  btn-floating red"><i class="material-icons">delete</i></a>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
 
 <div class="fixed-action-btn">
   <a class="btn-floating btn-large teal">
     <i class="large material-icons">add</i>
   </a>
   <ul>
-    <li><a class="btn-floating red tooltipped" data-position="bottom" data-tooltip="I am a tooltip"><i class="material-icons">business</i>Agregar Empresa</a></li>
-    <li><a class="btn-floating blue"><i class="material-icons">widgets</i></a></li>
+    <li><a class="btn-floating red tooltipped modal-trigger" href="#addOffice" data-position="left" data-tooltip="Agregar Empresa"><i class="material-icons">business</i>Agregar Empresa</a></li>
+    <li><a class="btn-floating blue tooltipped" data-position="left" data-tooltip="Agregar Producto"><i class="material-icons">widgets</i></a></li>
   </ul>
+</div>
+
+<div id="addOffice" class="modal modal-fixed-footer">
+  <div class="modal-content">
+    <h4>Agregar Oficina</h4>
+    <form class="col s12">
+      <div class="card ">
+        <div class="card-content ">
+          <span class="card-title">Horario</span>
+          <table>
+            <thead>
+              <th>Día</th>
+              <th>Apertura</th>
+              <th>Cierre</th>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Lunes</td>
+                <td><input type="text" required class="timepicker"></td>
+                <td><input type="text" required class="timepicker"></td>
+              </tr>
+              <tr>
+                <td>Lunes</td>
+                <td><input type="text" required class="timepicker"></td>
+                <td><input type="text" required class="timepicker"></td>
+              </tr>
+              <tr>
+                <td>Martes</td>
+                <td><input type="text" required class="timepicker"></td>
+                <td><input type="text" required class="timepicker"></td>
+              </tr>
+              <tr>
+                <td>Miécoles</td>
+                <td><input type="text" required class="timepicker"></td>
+                <td><input type="text" required class="timepicker"></td>
+              </tr>
+              <tr>
+                <td>Jueves</td>
+                <td><input type="text" required class="timepicker"></td>
+                <td><input type="text" required class="timepicker"></td>
+              </tr>
+              <tr>
+                <td>Viernes</td>
+                <td><input type="text" required class="timepicker"></td>
+                <td><input type="text" required class="timepicker"></td>
+              </tr>
+              <tr>
+                <td>Sábado</td>
+                <td><input type="text" required class="timepicker"></td>
+                <td><input type="text" required class="timepicker"></td>
+              </tr>
+              <tr>
+                <td>Domingo</td>
+                <td><input type="text" required class="timepicker"></td>
+                <td><input type="text" required class="timepicker"></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-content">
+          <span class="card-title">Dirección</span>
+          <div class="input-field">
+            <select id="city">
+              <option value="" disabled selected>Elige la Ciudad</option>
+              <option value="1">Aguascalientes</option>
+              <option value="2">Baja California</option>
+              <option value="3">Baja California Sur</option>
+              <option value="4">Campeche</option>
+              <option value="5">Coahuila de Zaragoza</option>
+              <option value="6">Colima</option>
+              <option value="7">Chiapas</option>
+              <option value="8">Chihuahua</option>
+              <option value="9">Distrito Federal</option>
+              <option value="10">Durango</option>
+              <option value="11">Guanajuato</option>
+              <option value="12">Guerrero</option>
+              <option value="13">Hidalgo</option>
+              <option value="14">Jalisco</option>
+              <option value="15">México</option>
+              <option value="16">Michoacán de Ocampo</option>
+              <option value="17">Morelos</option>
+              <option value="18">Nayarit</option>
+              <option value="19">Nuevo León</option>
+              <option value="20">Oaxaca</option>
+              <option value="21">Puebla</option>
+              <option value="22">Querétaro</option>
+              <option value="23">Quintana Roo</option>
+              <option value="24">San Luis Potosí</option>
+              <option value="25">Sinaloa</option>
+              <option value="26">Sonora</option>
+              <option value="27">Tabasco</option>
+              <option value="28">Tamaulipas</option>
+              <option value="29">Tlaxcala</option>
+              <option value="30">Veracruz de Ignacio de la Llave</option>
+              <option value="31">Yucatán</option>
+              <option value="32">Zacatecas</option>
+            </select>
+            <label for="city">Ciudad</label>
+          </div>
+          <div class="input-field">
+            <input id="township" type="text">
+            <label for="township">Municipio</label>
+          </div>
+          <div class="input-field">
+            <input id="street" type="text">
+            <label for="street">Calle</label>
+          </div>
+          <div class="input-field">
+            <input id="number" type="number">
+            <label for="number">Número</label>
+          </div>
+          <div class="input-field">
+            <input id="cp" type="text">
+            <label for="cp">Código Postal</label>
+          </div>
+          Coordenada
+          <div #gmap style="width:100%;height:400px"></div>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-content">
+          <span class="card-title">Información de Usuario</span>
+          <div class="input-field">
+            <input id="email" type="email" class="validate">
+            <label for="email">Correo</label>
+            <span class="helper-text" data-error="Correo inválido" data-success="right">alguien@dominio.com</span>
+          </div>
+          <div class="input-field">
+            <input id="password" type="password">
+            <label for="password">Contraseña</label>
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
+  <div class="modal-footer">
+    <a href="#!" class="modal-close waves-effect waves-green btn-flat">Cancelar</a>
+    <a href="#!" class="modal-close waves-effect waves-green btn-flat">Guardar</a>
+  </div>
 </div>
