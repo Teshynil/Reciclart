@@ -9,7 +9,7 @@ declare var M:any;
   templateUrl: './offices-view.component.html',
   styleUrls: ['./offices-view.component.css']
 })
-export class OfficesViewComponent implements OnInit {¿
+export class OfficesViewComponent implements OnInit {
   offices: any;
   constructor(private authService: AuthService, private router: Router, private api: APIService) {
     if (!this.authService.isLoggedIn()) {

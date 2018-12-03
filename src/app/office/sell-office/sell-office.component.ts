@@ -1,18 +1,18 @@
 import { Component, OnInit } from '@angular/core';
-import { delay } from 'rxjs/operators';
 declare var M:any;
 @Component({
-  selector: 'app-purchase',
-  templateUrl: './purchase.component.html',
-  styleUrls: ['./purchase.component.css']
+  selector: 'app-sell-office',
+  templateUrl: './sell-office.component.html',
+  styleUrls: ['./sell-office.component.css']
 })
-export class PurchaseComponent implements OnInit {
-  public material;
+export class SellOfficeComponent implements OnInit {
+
+  public item;
   public quantity;
   public total;
   public client;
   constructor() {
-    this.material = this.client = '';
+    this.item = this.client = '';
     this.quantity = this.total = 0;
     document.addEventListener('DOMContentLoaded', function() {
       var elems = document.querySelectorAll('select');
@@ -24,12 +24,9 @@ export class PurchaseComponent implements OnInit {
   }
 
   submit(){
-    console.log(this.client, this.material, this.quantity);
+    console.log(this.client, this.item, this.quantity);
     this.total = this.quantity*20;
     console.log(this.total);
   }
-  
 
 }
-
-

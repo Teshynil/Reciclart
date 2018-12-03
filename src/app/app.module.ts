@@ -16,16 +16,20 @@ import { APIService } from "./api.service";
 import { OfficesViewComponent } from './offices-view/offices-view.component';
 import { TransactionsViewComponent } from './transactions-view/transactions-view.component';
 import { TableRowComponent } from './table-row/table-row.component';
-import { OfficeDetailComponent } from './office-detail/office-detail.component';
 import { MainComponent } from './centers/main/main.component';
 import { PurchaseComponent } from './centers/purchase/purchase.component';
 import { MaterialsComponent } from './centers/materials/materials.component';
 import { TransactionsComponent } from './centers/transactions/transactions.component';
+import { MainOfficeComponent } from './office/main-office/main-office.component';
+import { ItemsOfficeComponent } from './office/items-office/items-office.component';
+import { TransactionsOfficeComponent } from './office/transactions-office/transactions-office.component';
+import { SellOfficeComponent } from './office/sell-office/sell-office.component';
+import { RedirectComponent } from './redirect/redirect.component';
 
 const routes: Routes = [
   {
     path: '',
-    component: MainViewComponent
+    component: RedirectComponent
   },
   {
     path: 'login',
@@ -58,6 +62,22 @@ const routes: Routes = [
   {
     path: 'center/transactions',
     component: TransactionsComponent
+  },
+  {
+    path: 'office/main',
+    component: MainOfficeComponent
+  },
+  {
+    path: 'office/sell',
+    component: SellOfficeComponent
+  },
+  {
+    path: 'office/items',
+    component: ItemsOfficeComponent
+  },
+  {
+    path: 'office/transactions',
+    component: TransactionsOfficeComponent
   }
 ];
 export const routing = RouterModule.forRoot(routes);
@@ -72,11 +92,15 @@ export const routing = RouterModule.forRoot(routes);
     OfficesViewComponent,
     TransactionsViewComponent,
     TableRowComponent,
-    OfficeDetailComponent,
     MainComponent,
     PurchaseComponent,
     MaterialsComponent,
-    TransactionsComponent
+    TransactionsComponent,
+    MainOfficeComponent,
+    ItemsOfficeComponent,
+    TransactionsOfficeComponent,
+    SellOfficeComponent,
+    RedirectComponent
   ],
   imports: [
     BrowserModule,

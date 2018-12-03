@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { OfficeDetailComponent } from './office-detail.component';
+import { SellOfficeComponent } from './sell-office.component';
 
-describe('OfficeDetailComponent', () => {
-  let component: OfficeDetailComponent;
-  let fixture: ComponentFixture<OfficeDetailComponent>;
+describe('SellOfficeComponent', () => {
+  let component: SellOfficeComponent;
+  let fixture: ComponentFixture<SellOfficeComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ OfficeDetailComponent ]
+      declarations: [ SellOfficeComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(OfficeDetailComponent);
+    fixture = TestBed.createComponent(SellOfficeComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
