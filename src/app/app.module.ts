@@ -3,7 +3,7 @@ import { NgModule } from '@angular/core';
 import { FormsModule } from "@angular/forms";
 import { RouterModule, Routes } from '@angular/router';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
-
+import { AgmCoreModule } from '@agm/core';
 import { AppComponent } from './app.component';
 import { SideMenuComponent } from './side-menu/side-menu.component';
 import { TopBarComponent } from './top-bar/top-bar.component';
@@ -107,6 +107,9 @@ export const routing = RouterModule.forRoot(routes);
     FormsModule,
     HttpClientModule,
     routing,
+    AgmCoreModule.forRoot({
+      apiKey: 'AIzaSyD4k1JwfAOl27-DgCiwPQLG7rlr3fGyM3'
+    })
   ],
   providers: [
     AuthService,

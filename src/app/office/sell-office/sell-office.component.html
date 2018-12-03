@@ -9,27 +9,27 @@
             <form class="col s12 m8 l4" ngNoForm (submit)="submit()">
               <div class="row">
                     <div class="input-field col s12">
-                            <select required [(ngModel)]="item" name="material">
+                            <select required [(ngModel)]="item" name="material" class="browser-default">
                                 <option value="" disabled selected>Elige el Producto</option>
-                                <option value="[item.id]">[item.name]</option>                               
+                                <option *ngFor="let itx of items;index as i" value="{{i}}">{{itx.name}}</option>                               
                             </select>
                     </div>
               </div>
               <div class="row">
                     <div class="input-field col s12">
-                      <input id="quantity" type="number" step="1" min="1" class="validate"  required [(ngModel)]="quantity" name="quantity">
+                      <input id="quantity" (change)="getTotal()" type="number" step="1" min="1" class="validate"  required [(ngModel)]="quantity" name="quantity">
                       <label for="quantity">Cantidad</label>
                     </div>
                 </div>
               <div class="row">
                 <div class="input-field col s12">
-                  <input disabled value="" id="disabled" type="number" class="validate">
+                  <input disabled value="" [(ngModel)]="total" id="disabled" type="number" class="validate">
                   <label for="disabled">Total</label>
                 </div>
               </div>
               <div class="row">
                 <div class="input-field col s12">
-                  <input id="client" type="text" class="validate" required [(ngModel)]="client" name="client">
+                  <input id="client" type="email" class="validate" required [(ngModel)]="client" name="client">
                   <label for="client">Cliente</label>
                 </div>
               </div>

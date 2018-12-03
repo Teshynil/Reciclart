@@ -24,7 +24,7 @@ export class MainViewComponent implements OnInit {
 
   ngOnInit() {
     this.api.getTransactions().subscribe(result => {
-      this.transacciones=result.slice(0,4);
+      this.transacciones=result.reverse().slice(0,4);
       for(let trans of this.transacciones ){
         this.total += trans.getTotal();
       }
