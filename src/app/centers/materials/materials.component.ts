@@ -95,6 +95,6 @@ export class MaterialsComponent implements OnInit, AfterContentChecked {
 
     addMaterialModal(){
         var modal = document.querySelector('#addMaterialModal');
-        modal.M_Modal.open();
+      //  modal.M_Modal.open();
     }
 }

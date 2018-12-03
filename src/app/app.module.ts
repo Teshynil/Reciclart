@@ -108,7 +108,7 @@ export const routing = RouterModule.forRoot(routes);
     HttpClientModule,
     routing,
     AgmCoreModule.forRoot({
-      apiKey: 'AIzaSyD4k1JwfAOl27-DgCiwPQLG7rlr3fGyM3'
+      apiKey: 'AIzaSyBHien8sQStuMbMWXHvkO8tIMCuYbH2g48'
     })
   ],
   providers: [
