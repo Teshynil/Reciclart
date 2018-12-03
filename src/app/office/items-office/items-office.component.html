@@ -1,26 +1,34 @@
 <app-top-bar></app-top-bar>
 <app-side-menu></app-side-menu>
 <div class="container">
-    <div class="col s12 m7">
+    <div class="col s12 m12">
         <table>
             <thead>
               <tr>
                   <th>Nombre</th>
                   <th>Precio</th>
-                  <th>Acciones</th>
+                  <th>Ventas totales</th>
               </tr>
             </thead>
-    
             <tbody>
               <tr *ngFor="let item of items">
                 <td>{{item.name}}</td>
                 <td>{{item.value}}</td>
-                <td>
-                  <a class="waves-effect waves-teal btn-flat"><i class="material-icons">edit</i></a>
-                  <a class="waves-effect waves-teal btn-flat"><i class="material-icons">delete</i></a>
-                </td>
+                <td>{{item.transactions}}</td>
               </tr>
             </tbody>
           </table>
       </div>
+</div>
+<div id="confirmDelete" class="modal">
+  <div class="modal-content">
+    <h4>Aviso</h4>
+    <p>Borrar un item puede causar problemas,
+       sí el item se encuentra en alguna transacción no se podra borrar,
+        y aparecera un mensaje de error</p>
+  </div>
+  <div class="modal-footer">
+    <a class="waves-effect waves-red btn-flat" (click)="confirmDelete(true)">Estoy seguro, Borrar!</a>
+    <a class="btn-flat" (click)="confirmDelete(false)">Cancelar</a>
+  </div>
 </div>

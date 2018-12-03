@@ -7,6 +7,8 @@ import { Enterprise } from './models/enterprise';
 import { Office } from "./models/office";
 import { Transaction } from './models/transaction';
 import { Item } from './models/item';
+import { Center } from './models/center';
+import { Material } from './models/material';
 @Injectable()
 export class APIService {
   private result;
@@ -64,5 +66,39 @@ export class APIService {
     .pipe(
       map(res=>res)
       );
+  }
+
+  getMyCenter() {
+    return this.http.get("https://reciclarte-api.azurewebsites.net/api/centers/mycenter")
+    .pipe(
+      map(res => plainToClass(Center, res as Object[]))
+    );
+  }
+  getCenterTransactions() {
+    return this.http.get("https://reciclarte-api.azurewebsites.net/api/centers/mycenter/transactions")
+    .pipe(
+      map(res => plainToClass(Transaction, res as Object[]))
+    );
+  }
+
+  postCenterSale(accountId:string,materials:Material,quantity:number) {
+    let itms={[materials.id]:quantity}
+    let body={
+      userid:accountId,
+      materials: itms
+    };
+    return this.http.post("https://reciclarte-api.azurewebsites.net/api/centers/mycenter/buy",body);
+  }
+  delCenterMaterial(id:string){
+    return this.http.request("DELETE","https://reciclarte-api.azurewebsites.net/api/centers/mycenter/materials",{body:[id]});
+  }
+  getMaterials(){
+    return this.http.get("https://reciclarte-api.azurewebsites.net/api/materials")
+    .pipe(
+      map(res => plainToClass(Material, res as Object[]))
+    );
+  }
+  addMaterial(id){
+    return this.http.post("https://reciclarte-api.azurewebsites.net/api/centers/mycenter/materials",[id]);
   }
 }

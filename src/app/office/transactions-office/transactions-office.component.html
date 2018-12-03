@@ -2,58 +2,42 @@
 <app-side-menu></app-side-menu>
 <div class="container">
 
-        <div class="card">
-                <div class="card-content">
-                  <h5>Transacciones hechas por cada Producto.</h5>
+    <div class="card">
+        <div class="card-content">
+            <h5>Transacciones hechas por cada Producto.</h5>
+        </div>
+        <div class="card-tabs">
+            <ul class="tabs tabs-fixed-width">
+                <li class="tab" *ngFor="let item of items"><a href="#{{item.name}}{{item.id}}">{{item.name}}</a></li>
+            </ul>
+        </div>
+        <ul id="{{item.name}}{{item.id}}" class="col s12 m7 collapsible popout" *ngFor="let item of items">
+            <li>
+                <div class="collapsible-header">
+                    <h3 class="header">{{item.name}}</h3>
                 </div>
-                <div class="card-tabs">
-                  ESTOS TAGS DEBERIAN SER GENERADOS EN AUTOMATICO DEPENDIENDO LOS PRODUCTOS DE LA OFICINA
-
-                  <ul class="tabs tabs-fixed-width">
-                    <li class="tab"><a href="#aluminio">PRODUCTO1</a></li>
-                    <li class="tab"><a href="#papel">PRODUCTO2</a></li>
-                    <li class="tab"><a href="#vidrio">PRODUCTO3</a></li>
-                  </ul>
-                </div>
-
-                ESTO DEBERIA ESTAR EN UN NGFOR PARA POPULAR LOS PRODUCTOS CON ESTE CARD TEMPLATE
-                <div id="aluminio" class="col s12 m7">
-                        <h3 class="header">PRODUCTO.NAME</h3>
-                        <div class="card horizontal">
-                          <div class="card-image">
-                            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSLlAV1hvgHnSFk045Tz2Hr8O2bJNdovHSCpj00T2GgIB34gf3Npg">
-                          </div>
-                          <div class="card-stacked">
+                <div class="collapsible-body">
+                    <div class="card horizontal">
+                        <div class="card-stacked">
                             <div class="card-content">
-                            <h4>Total: FUNCION SUMADORA</h4>
-                            <ul class="collection">
-                                    <li class="collection-item avatar">
+                                <h4>Total: {{item.totaltransacciones}}</h4>
+                                <ul class="collection">
+                                    <li class="collection-item avatar" *ngFor="let transac of item.transacciones">
                                         <i class="material-icons circle green">insert_chart</i>
-                                        <span class="title">Polfi Wolf</span>
-                                        <p>1.25 kgs <br>
-                                            28/11/2018 a las 12:30
+                                        <span class="title">{{transac.user}}</span>
+                                        <p>Cantidad {{transac.quantity}} <br>
+                                            {{transac.date}}
                                         </p>
-                                        <a class="secondary-content"><h5>$25.00</h5></a>
+                                        <a class="secondary-content">
+                                            <h5>$ {{transac.getTotal()}}</h5>
+                                        </a>
                                     </li>
-                                    <li class="collection-item avatar">
-                                      <i class="material-icons circle green">insert_chart</i>
-                                      <span class="title">Vic Hernández</span>
-                                      <p>3.00 kgs <br>
-                                         01/12/2018 a las 15:14
-                                      </p>
-                                      <a class="secondary-content"><h5>$60.00</h5></a>
-                                    </li>
-                            </ul>
+                                </ul>
                             </div>
-                          </div>
                         </div>
-                      </div>
-                
-                      
-                
-                          
+                    </div>
                 </div>
-              </div>
-
-        
-    
+            </li>
+        </ul>
+    </div>
+</div>

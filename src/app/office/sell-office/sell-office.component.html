@@ -9,7 +9,7 @@
             <form class="col s12 m8 l4" ngNoForm (submit)="submit()">
               <div class="row">
                     <div class="input-field col s12">
-                            <select required [(ngModel)]="item" name="material" class="browser-default">
+                            <select required [(ngModel)]="item" name="item" class="browser-default">
                                 <option value="" disabled selected>Elige el Producto</option>
                                 <option *ngFor="let itx of items;index as i" value="{{i}}">{{itx.name}}</option>                               
                             </select>

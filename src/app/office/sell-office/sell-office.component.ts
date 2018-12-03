@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, AfterContentChecked } from '@angular/core';
 import { Item } from 'src/app/models/item';
 import { APIService } from 'src/app/api.service';
 import { Office } from 'src/app/models/office';
@@ -18,19 +18,18 @@ export class SellOfficeComponent implements OnInit {
   constructor(private api:APIService) {
     this.item = this.client = '';
     this.quantity = this.total = 0;
-    document.addEventListener('DOMContentLoaded', function() {
-      
-    });
   }
 
   ngOnInit() {
     this.api.getMyOffice().subscribe(
       (res:Office[])=>{
         this.items=res[0].items;
+        var elems = document.querySelectorAll('select');
+        var instances = M.FormSelect.init(elems);
       }
     );
   }
-
+  
   submit(){
     this.api.getAccountId(this.client).subscribe(
       (userId:string)=>this.api.postOfficeSale(userId,this.items[this.item],this.quantity).subscribe(
