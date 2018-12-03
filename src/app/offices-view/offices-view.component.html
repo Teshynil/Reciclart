@@ -186,7 +186,15 @@
             <label for="cp">Código Postal</label>
           </div>
           Coordenada
-          <div #gmap style="width:100%;height:400px"></div>
+          <div class="form-group">
+            <input type="text" placeholder="Search for Location" autocorrect="off" autocapitalize="off" spellcheck="off" class="form-control"
+              #search>
+          </div>
+          <agm-map [latitude]="lat" [longitude]="lng" [zoom] ="zoom" (mapClick)="mapClicked($event)">
+            <agm-marker [latitude]="point.lat" [longitude]="point.lng" [label]="point.label">
+              <agm-info-window>Nueva Oficina</agm-info-window>
+            </agm-marker>
+          </agm-map>
         </div>
       </div>
       <div class="card">
