@@ -1,6 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { FormsModule } from "@angular/forms";
+import { FormsModule,ReactiveFormsModule } from "@angular/forms";
 import { RouterModule, Routes } from '@angular/router';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AgmCoreModule } from '@agm/core';
@@ -25,7 +25,6 @@ import { ItemsOfficeComponent } from './office/items-office/items-office.compone
 import { TransactionsOfficeComponent } from './office/transactions-office/transactions-office.component';
 import { SellOfficeComponent } from './office/sell-office/sell-office.component';
 import { RedirectComponent } from './redirect/redirect.component';
-
 const routes: Routes = [
   {
     path: '',
@@ -106,6 +105,7 @@ export const routing = RouterModule.forRoot(routes);
     BrowserModule,
     FormsModule,
     HttpClientModule,
+    ReactiveFormsModule,
     routing,
     AgmCoreModule.forRoot({
       apiKey: 'AIzaSyBHien8sQStuMbMWXHvkO8tIMCuYbH2g48'
