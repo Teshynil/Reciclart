@@ -50,7 +50,7 @@
             <td>{{office.address.number}}</td>
           </tr>
         </td>
-        <td><a class="waves-effect waves-light  btn-floating blue"><i class="material-icons">edit</i></a>
+        <td><a class="waves-effect waves-light  btn-floating blue modal-trigger" href="#editOffice" (click)="getCurrentOffice(office)"><i class="material-icons">edit</i></a>
           <a class="waves-effect waves-light  btn-floating red"><i class="material-icons">delete</i></a>
         </td>
       </tr>
@@ -205,5 +205,143 @@
   <div class="modal-footer">
     <a href="#!" class="modal-close waves-effect waves-green btn-flat">Cancelar</a>
     <button class="waves-effect waves-green btn-flat" type="submit" [formGroup]="addOfficeForm" form="addOfficeFormDOM">Guardar</button>
+  </div>
+</div>
+
+<div id="editOffice" class="modal modal-fixed-footer">
+  <div class="modal-content">
+    <h4>Editar Oficina</h4>
+    <form class="col s12" (ngSubmit)="onSubmit()">
+      <div class="card">
+        <div class="card-content ">
+          <span class="card-title">Horario</span>
+          <table>
+            <thead>
+              <th>Día</th>
+              <th>Apertura</th>
+              <th>Cierre</th>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Lunes</td>
+                <td><input type="text" required class="timepicker" value="{{currentOffice.schedule.lu.substr(0,5)}}"></td>
+                <td><input type="text" required class="timepicker" value="{{currentOffice.schedule.lu.substr(6,10)}}"></td>
+              </tr>
+              <tr>
+                <td>Martes</td>
+                <td><input type="text" required class="timepicker" value="{{currentOffice.schedule.ma.substr(0,5)}}"></td>
+                <td><input type="text" required class="timepicker" value="{{currentOffice.schedule.ma.substr(6,10)}}"></td>
+              </tr>
+              <tr>
+                <td>Miécoles</td>
+                <td><input type="text" required class="timepicker" value="{{currentOffice.schedule.mi.substr(0,5)}}"></td>
+                <td><input type="text" required class="timepicker" value="{{currentOffice.schedule.mi.substr(6,10)}}"></td>
+              </tr>
+              <tr>
+                <td>Jueves</td>
+                <td><input type="text" required class="timepicker" value="{{currentOffice.schedule.ju.substr(0,5)}}"></td>
+                <td><input type="text" required class="timepicker" value="{{currentOffice.schedule.ju.substr(6,10)}}"></td>
+              </tr>
+              <tr>
+                <td>Viernes</td>
+                <td><input type="text" required class="timepicker" value="{{currentOffice.schedule.vi.substr(0,5)}}"></td>
+                <td><input type="text" required class="timepicker" value="{{currentOffice.schedule.vi.substr(6,10)}}"></td>
+              </tr>
+              <tr>
+                <td>Sábado</td>
+                <td><input type="text" required class="timepicker" value="{{currentOffice.schedule.sa.substr(0,5)}}"></td>
+                <td><input type="text" required class="timepicker" value="{{currentOffice.schedule.sa.substr(6,10)}}"></td>
+              </tr>
+              <tr>
+                <td>Domingo</td>
+                <td><input type="text" required class="timepicker" value="{{currentOffice.schedule.do.substr(0,5)}}"></td>
+                <td><input type="text" required class="timepicker" value="{{currentOffice.schedule.do.substr(6,10)}}"></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-content">
+          <span class="card-title">Dirección</span>
+          <div class="input-field">
+            <select id="city2" [value]="value">
+              <option value="1">Aguascalientes</option>
+              <option value="2">Baja California</option>
+              <option value="3">Baja California Sur</option>
+              <option value="4">Campeche</option>
+              <option value="5">Coahuila de Zaragoza</option>
+              <option value="6">Colima</option>
+              <option value="7">Chiapas</option>
+              <option value="8">Chihuahua</option>
+              <option value="9">Distrito Federal</option>
+              <option value="10">Durango</option>
+              <option value="11">Guanajuato</option>
+              <option value="12">Guerrero</option>
+              <option value="13">Hidalgo</option>
+              <option value="14">Jalisco</option>
+              <option value="15">México</option>
+              <option value="16">Michoacán de Ocampo</option>
+              <option value="17">Morelos</option>
+              <option value="18">Nayarit</option>
+              <option value="19">Nuevo León</option>
+              <option value="20">Oaxaca</option>
+              <option value="21">Puebla</option>
+              <option value="22">Querétaro</option>
+              <option value="23">Quintana Roo</option>
+              <option value="24">San Luis Potosí</option>
+              <option value="25">Sinaloa</option>
+              <option value="26">Sonora</option>
+              <option value="27">Tabasco</option>
+              <option value="28">Tamaulipas</option>
+              <option value="29">Tlaxcala</option>
+              <option value="30">Veracruz de Ignacio de la Llave</option>
+              <option value="31">Yucatán</option>
+              <option value="32">Zacatecas</option>
+            </select>
+            <label for="city2">Ciudad</label>
+          </div>
+          <div class="input-field">
+            <input id="township2" placeholder="" type="text" value="{{currentOffice.address.township}}">
+            <label class="active" for="township2">Municipio</label>
+          </div>
+          <div class="input-field">
+            <input id="street2" placeholder="" type="text" value="{{currentOffice.address.street}}">
+            <label class="active" for="street2">Calle</label>
+          </div>
+          <div class="input-field">
+            <input id="number2" placeholder="" type="number" value="{{currentOffice.address.number}}">
+            <label for="number2">Número</label>
+          </div>
+          <div class="input-field">
+            <input id="cp2" placeholder="" type="text" value="{{currentOffice.address.pc}}">
+            <label for="cp2">Código Postal</label>
+          </div>
+          Coordenada
+          <div class="form-group">
+            <input type="text" placeholder="Search for Location" autocorrect="off" autocapitalize="off" spellcheck="off"
+              class="form-control" #search>
+          </div>
+          <agm-map [latitude]="lat" [longitude]="lng" [zoom]="zoom" (mapClick)="mapClicked($event)">
+            <agm-marker [latitude]="point.lat" [longitude]="point.lng" [label]="point.label">
+              <agm-info-window>Nueva Oficina</agm-info-window>
+            </agm-marker>
+          </agm-map>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-content">
+          <span class="card-title">Información de Usuario</span>
+          <div class="input-field">
+            <input id="passwor2d" type="password">
+            <label for="password2">Contraseña</label>
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
+  <div class="modal-footer">
+    <a href="#!" class="modal-close waves-effect waves-green btn-flat">Cancelar</a>
+    <a href="#!" class="modal-close waves-effect waves-green btn-flat">Guardar</a>
   </div>
 </div>
