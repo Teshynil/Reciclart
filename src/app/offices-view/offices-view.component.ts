@@ -4,6 +4,8 @@ import { AuthService } from '../auth-service.service';
 import { Router } from '@angular/router';
 import { MouseEvent } from '@agm/core';
 import { FormGroup, FormControl } from '@angular/forms';
+import { Office } from '../models/office';
+import { of } from 'rxjs';
 
 declare var M:any;
 @Component({
@@ -15,12 +17,47 @@ export class OfficesViewComponent implements OnInit {
   lat: number = 19.4978;
   lng: number = -99.1269;
   zoom: number = 4;
-  offices: any;
+  currentOffice : Office;
+  value : any;
+  offices: Office[];
   point: Object = {
     lat: 19.4978,
     lng: -99.1269,
     draggable: true
   };
+  states: Object = {
+    "Aguascalientes": "1",
+    "Baja California": "2",
+    "Baja California Sur": "3",
+    "Campeche": "4",
+    "Coahuila de Zaragoza": "5",
+    "Colima": "6",
+    "Chiapas": "7",
+    "Chihuahua": "8",
+    "Distrito Federal": "9",
+    "Durango": "10",
+    "Guanajuato": "11",
+    "Guerrero": "12",
+    "Hidalgo": "13",
+    "Jalisco": "14",
+    "México": "15",
+    "Michoacán de Ocampo": "16",
+    "Morelos": "17",
+    "Nayarit": "18",
+    "Nuevo León": "19",
+    "Oaxaca": "20",
+    "Puebla": "21",
+    "Querétaro": "22",
+    "Quintana Roo": "23",
+    "San Luis Potosí": "24",
+    "Sinaloa": "25",
+    "Sonora": "26",
+    "Tabasco": "27",
+    "Tamaulipas": "28",
+    "Tlaxcala": "29",
+    "Veracruz de Ignacio de la Llave": "30",
+    "Yucatán": "31",
+    "Zacatecas" : "32"} ;
   addOfficeForm = new FormGroup({
     schedule : new FormGroup({
       lu : new FormGroup({
@@ -115,6 +152,21 @@ export class OfficesViewComponent implements OnInit {
 
   onSubmit(){
     console.log("hola");
+  }
+
+  getCurrentOffice(office : Office){
+    this.currentOffice = office;
+    this.lat = office.point.lat;
+    this.lng = office.point.long;
+    this.point = {
+      lat: office.point.lat,
+      lng: office.point.long,
+      draggable: true
+    };
+    this.zoom = 14;
+    this.value = this.states[office.address.city];
+    console.log(office);
+    
   }
 
 
