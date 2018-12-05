@@ -128,9 +128,6 @@ states: Object = {
             }
         );
         this.setCurrentPosition();
-  constructor(private authService: AuthService, private router: Router, private api: APIService) {
-    if (!this.authService.isLoggedIn()) {
-      this.router.navigate(['/login']);
     }
 
     private setCurrentPosition() {
@@ -175,6 +172,19 @@ states: Object = {
     this.value = this.states[office.address.city];
     console.log(office);
     
+  }
+
+  editOffice(){
+    let error = false;
+        error=this.review(this.addOfficeForm.controls);
+        if(error) return false;
+
+        let noffice:Office;
+        noffice=new Office();
+        noffice=this.addOfficeForm.value;
+        console.log(noffice);
+        //console.log(eoffice);
+
   }
 
 

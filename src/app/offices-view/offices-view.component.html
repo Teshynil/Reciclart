@@ -211,7 +211,7 @@
 <div id="editOffice" class="modal modal-fixed-footer">
   <div class="modal-content">
     <h4>Editar Oficina</h4>
-    <form class="col s12" (ngSubmit)="onSubmit()">
+    <form novalidate  id="editOfficeFormDOM" class="col s12" [formGroup]="addOfficeForm" (ngSubmit)="editOffice()">
       <div class="card">
         <div class="card-content ">
           <span class="card-title">Horario</span>
@@ -320,7 +320,7 @@
           Coordenada
           <div class="form-group">
             <input type="text" placeholder="Search for Location" autocorrect="off" autocapitalize="off" spellcheck="off"
-              class="form-control" #search>
+              class="form-control" value="{{currentOffice.point.lat}}, {{currentOffice.point.long}}"#search>
           </div>
           <agm-map [latitude]="lat" [longitude]="lng" [zoom]="zoom" (mapClick)="mapClicked($event)">
             <agm-marker [latitude]="point.lat" [longitude]="point.lng" [label]="point.label">
@@ -342,6 +342,6 @@
   </div>
   <div class="modal-footer">
     <a href="#!" class="modal-close waves-effect waves-green btn-flat">Cancelar</a>
-    <a href="#!" class="modal-close waves-effect waves-green btn-flat">Guardar</a>
+    <button class="waves-effect waves-green btn-flat" type="submit" [formGroup]="addOfficeForm" form="editOfficeFormDOM">Guardar</button>
   </div>
 </div>

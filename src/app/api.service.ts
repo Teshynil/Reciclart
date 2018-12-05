@@ -101,4 +101,8 @@ export class APIService {
   addMaterial(id){
     return this.http.post("https://reciclarte-api.azurewebsites.net/api/centers/mycenter/materials",[id]);
   }
+
+  editOffice(office:Office){
+    return this.http.put("https://reciclarte-api.azurewebsites.net/api/enterprises/myenterprise/offices",office);
+  }
 }
