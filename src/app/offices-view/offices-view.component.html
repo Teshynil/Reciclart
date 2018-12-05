@@ -28,7 +28,7 @@
                 </tr>
               </thead>
               <tbody>
-                <tr>
+                <tr *ngIf="office.schedule">
                   <td>{{office.schedule.lu}}</td>
                   <td>{{office.schedule.ma}}</td>
                   <td>{{office.schedule.mi}}</td>
@@ -40,9 +40,9 @@
               </tbody>
             </table> 
         </td>
-        <td>({{office.point.lat}} , {{office.point.long}})</td>
+        <td *ngIf="office.point">({{office.point.lat}} , {{office.point.long}})</td>
         <td>
-          <tr style="border-bottom : none !important;">
+          <tr *ngIf="office.address" style="border-bottom : none !important;">
             <td>{{office.address.township}}</td>
             <td>{{office.address.city}}</td>
             <td>{{office.address.pc}}</td>
@@ -50,7 +50,9 @@
             <td>{{office.address.number}}</td>
           </tr>
         </td>
-        <td><a class="waves-effect waves-light  btn-floating blue modal-trigger" href="#editOffice" (click)="getCurrentOffice(office)"><i class="material-icons">edit</i></a>
+        <td>
+          <a class="waves-effect waves-light  btn-floating green modal-trigger" href="#addItem" (click)="getCurrentOffice(office)"><i class="material-icons">widgets</i></a>
+          <a class="waves-effect waves-light  btn-floating blue modal-trigger" href="#editOffice" (click)="getCurrentOffice(office)"><i class="material-icons">edit</i></a>
           <a class="waves-effect waves-light  btn-floating red"><i class="material-icons">delete</i></a>
         </td>
       </tr>
@@ -66,6 +68,54 @@
     <li><a class="btn-floating red tooltipped modal-trigger" href="#addOffice" data-position="left" data-tooltip="Agregar Empresa"><i class="material-icons">business</i>Agregar Empresa</a></li>
     <li><a class="btn-floating blue tooltipped" data-position="left" data-tooltip="Agregar Producto"><i class="material-icons">widgets</i></a></li>
   </ul>
+</div>
+
+<div id="addItem" class="modal modal-fixed-footer">
+  <div class="modal-content">
+    <div class="card"></div>
+      <span class="card-title">Productos</span>
+      <div class="container">
+          <table class="highlight centered responsive-table">
+            <thead>
+              <tr>
+              <th>#</th>
+              <th>Nombre</th>
+              <th>Precio</th>
+              </tr>
+            </thead>
+        
+            <tbody *ngFor="let item of currentOffice.items, let i=index">
+              <tr>
+                <td>{{i + 1}}</td>
+                <td>{{currentOffice.items[i].name}}</td>
+                <td>{{currentOffice.items[i].value}}</td>
+                <td>
+                  <a class="waves-effect waves-light  btn-floating red" (click)="info(item)"><i class="material-icons">delete</i></a>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <form novalidate  id="addItemFormDOM" class="col s12" [formGroup]="addItemForm" (ngSubmit)="onSubmitItem()">
+          <div class="card">
+            <div class="card-content" formGroupName="data">
+              <span class="card-title">Agregar Producto</span>
+              <div class="input-field">
+                <input id="name" type="text" formControlName="name">
+                <label for="name">Nombre</label>
+              </div>
+              <div class="input-field">
+                <input id="value" type="text" formControlName="value">
+                <label for="value">Precio</label>
+              </div>
+            </div>
+          </div>
+        </form>
+  </div>
+  <div class="modal-footer">
+    <a href="#!" class="modal-close waves-effect waves-green btn-flat">Cancelar</a>
+    <button class="modal-close waves-effect waves-green btn-flat" type="submit" [formGroup]="addItemForm" form="addItemFormDOM">Guardar</button>
+  </div>
 </div>
 
 <div id="addOffice" class="modal modal-fixed-footer">
