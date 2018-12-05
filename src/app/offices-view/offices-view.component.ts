@@ -6,6 +6,7 @@ import { MouseEvent } from '@agm/core';
 import { FormGroup, FormControl, Validators, AbstractControl } from '@angular/forms';
 import { Office } from '../models/office';
 import { of } from 'rxjs';
+import { Item } from '../models/item';
 
 declare var M: any;
 @Component({
@@ -101,6 +102,14 @@ states: Object = {
             password: new FormControl('',[Validators.required]),
         })
     },{updateOn:"submit"});
+
+    addItemForm = new FormGroup({
+        data: new FormGroup({
+            name: new FormControl('',[Validators.required]),
+            value: new FormControl('',[Validators.required])
+        })
+    },{updateOn:"submit"});
+
     constructor(private authService: AuthService, private router: Router, private api: APIService) {
         if (!this.authService.isLoggedIn()) {
             this.router.navigate(['/login']);
@@ -119,7 +128,7 @@ states: Object = {
             elems = document.querySelectorAll('select');
             instances = M.FormSelect.init(elems);
         });
-        this.api.getOffices().subscribe(result => {
+        this.api.getOfficesAndItems().subscribe(result => {
             this.offices = result;
             console.log(result);
         },
@@ -159,6 +168,39 @@ states: Object = {
         noffice=this.addOfficeForm.value;
         return false;
     }
+
+    onSubmitItem(){
+        let error = false;
+        console.log(this.addItemForm.value.data.name);
+        console.log(this.addItemForm.value.data.value);
+        error=this.review(this.addItemForm.controls);
+        if(error) return false;
+
+        let noitem:Item;
+        noitem=new Item();
+        noitem.name=this.addItemForm.value.data.name;
+        try
+        {
+            noitem.value=Number(this.addItemForm.value.data.value);
+        }
+        catch
+        {
+            return false;
+        }
+        noitem.officesId = this.currentOffice.id;
+        this.api.addItem(noitem).subscribe(
+            ()=>{
+                location.reload();
+                M.toast({html:"El producto fue añadido"});
+                return true;
+            },
+            ()=>{
+                M.toast({html:"Hubo un error"});
+            }
+        );
+        return false;
+    }
+
   getCurrentOffice(office : Office){
     this.currentOffice = office;
     this.lat = office.point.lat;
@@ -206,5 +248,18 @@ states: Object = {
             }
         }
         return err;
+    }
+
+    info(item:Item){
+        this.api.deleteItem(item).subscribe(
+            ()=>{
+                location.reload();
+                M.toast({html:"El producto fue eliminado"});
+                return true;
+            },
+            ()=>{
+                M.toast({html:"Hubo un error"});
+            }
+        );
     }
 }

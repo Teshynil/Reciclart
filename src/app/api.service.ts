@@ -9,6 +9,7 @@ import { Transaction } from './models/transaction';
 import { Item } from './models/item';
 import { Center } from './models/center';
 import { Material } from './models/material';
+import { HttpHeaders } from '@angular/common/http';
 @Injectable()
 export class APIService {
   private result;
@@ -104,5 +105,29 @@ export class APIService {
 
   editOffice(office:Office){
     return this.http.put("https://reciclarte-api.azurewebsites.net/api/enterprises/myenterprise/offices",office);
+  }
+
+  addItem(item:Item){
+    let body={
+      name: item.name,
+      value: item.value,
+      officesId: item.officesId
+    }
+    return this.http.post("https://reciclarte-api.azurewebsites.net/api/Enterprises/MyEnterprise/Items",body);
+  }
+  deleteItem(item:Item){
+    let body={
+      id: item.id,
+      officesId: item.officesId
+    };
+    return this.http.request('DELETE', "https://reciclarte-api.azurewebsites.net/api/Enterprises/MyEnterprise/Items", {
+      headers: new HttpHeaders({
+          'Content-Type': 'application/json',
+      }),
+      body: {
+        id: item.id,
+        officesId: item.officesId
+      }
+    });
   }
 }
