@@ -1,65 +1,66 @@
 <app-top-bar></app-top-bar>
 <app-side-menu></app-side-menu>
-<div class="container">
-  <table class="highlight centered responsive-table">
-    <thead>
-      <tr>
-      <th>#</th>
-      <th>Horario</th>
-      <th>Coordenada</th>
-      <th>Dirección</th>
-      </tr>
-    </thead>
+<div class="row">
+    <div class="col s10 offset-s1">
+    <table class="highlight centered responsive-table">
+        <thead>
+        <tr>
+        <th>#</th>
+        <th>Horario</th>
+        <th>Coordenada</th>
+        <th>Dirección</th>
+        </tr>
+        </thead>
 
-    <tbody *ngFor="let office of offices, let i=index">
-      <tr>
-        <td>{{i + 1}}</td>
-        <td>
-            <table>
-              <thead>
-                <tr>
-                  <th>Lunes</th>
-                  <th>Martes</th>
-                  <th>Miércoles</th>
-                  <th>Jueves</th>
-                  <th>Viernes</th>
-                  <th>Sábado</th>
-                  <th>Domingo</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr *ngIf="office.schedule">
-                  <td>{{office.schedule.lu}}</td>
-                  <td>{{office.schedule.ma}}</td>
-                  <td>{{office.schedule.mi}}</td>
-                  <td>{{office.schedule.ju}}</td>
-                  <td>{{office.schedule.vi}}</td>
-                  <td>{{office.schedule.sa}}</td>
-                  <td>{{office.schedule.do}}</td>
-                </tr>
-              </tbody>
-            </table> 
-        </td>
-        <td *ngIf="office.point">({{office.point.lat}} , {{office.point.long}})</td>
-        <td>
-          <tr *ngIf="office.address" style="border-bottom : none !important;">
-            <td>{{office.address.township}}</td>
-            <td>{{office.address.city}}</td>
-            <td>{{office.address.pc}}</td>
-            <td>{{office.address.street}}</td>
-            <td>{{office.address.number}}</td>
-          </tr>
-        </td>
-        <td>
-          <a class="waves-effect waves-light  btn-floating green modal-trigger" href="#addItem" (click)="getCurrentOffice(office)"><i class="material-icons">widgets</i></a>
-          <a class="waves-effect waves-light  btn-floating blue modal-trigger" href="#editOffice" (click)="getCurrentOffice(office)"><i class="material-icons">edit</i></a>
-          <a class="waves-effect waves-light  btn-floating red"><i class="material-icons">delete</i></a>
-        </td>
-      </tr>
-    </tbody>
-  </table>
+        <tbody *ngFor="let office of offices, let i=index">
+        <tr>
+            <td>{{i + 1}}</td>
+            <td>
+                <table>
+                <thead>
+                    <tr>
+                    <th>Lunes</th>
+                    <th>Martes</th>
+                    <th>Miércoles</th>
+                    <th>Jueves</th>
+                    <th>Viernes</th>
+                    <th>Sábado</th>
+                    <th>Domingo</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngIf="office.schedule">
+                    <td>{{office.schedule.lu}}</td>
+                    <td>{{office.schedule.ma}}</td>
+                    <td>{{office.schedule.mi}}</td>
+                    <td>{{office.schedule.ju}}</td>
+                    <td>{{office.schedule.vi}}</td>
+                    <td>{{office.schedule.sa}}</td>
+                    <td>{{office.schedule.do}}</td>
+                    </tr>
+                </tbody>
+                </table> 
+            </td>
+            <td *ngIf="office.point">({{office.point.lat}} , {{office.point.long}})</td>
+            <td>
+            <tr *ngIf="office.address" style="border-bottom : none !important;">
+                <td>{{office.address.township}}</td>
+                <td>{{office.address.city}}</td>
+                <td>{{office.address.pc}}</td>
+                <td>{{office.address.street}}</td>
+                <td>{{office.address.number}}</td>
+            </tr>
+            </td>
+            <td>
+            <a class="waves-effect waves-light btn-floating green " href="#addItem" (click)="openAddItem(office.id)"><i class="material-icons">widgets</i></a>
+            <a class="waves-effect waves-light btn-floating blue " href="#editOffice" (click)="openEditOffice(office.id)"><i class="material-icons">edit</i></a>
+            <a class="waves-effect waves-light btn-floating red"><i class="material-icons">delete</i></a>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+    </div>
 </div>
-
 <div class="fixed-action-btn">
   <a class="btn-floating btn-large teal">
     <i class="large material-icons">add</i>
@@ -84,8 +85,8 @@
               </tr>
             </thead>
         
-            <tbody *ngFor="let item of currentOffice.items, let i=index">
-              <tr>
+            <tbody *ngIf="currentOffice">
+              <tr *ngFor="let item of currentOffice.items, let i=index">
                 <td>{{i + 1}}</td>
                 <td>{{currentOffice.items[i].name}}</td>
                 <td>{{currentOffice.items[i].value}}</td>
@@ -96,25 +97,27 @@
             </tbody>
           </table>
         </div>
-        <form novalidate  id="addItemFormDOM" class="col s12" [formGroup]="addItemForm" (ngSubmit)="onSubmitItem()">
+        <form novalidate id="addItemFormDOM" class="col s12" [formGroup]="addItemForm" (ngSubmit)="onSubmitItem()">
           <div class="card">
             <div class="card-content" formGroupName="data">
               <span class="card-title">Agregar Producto</span>
               <div class="input-field">
-                <input id="name" type="text" formControlName="name">
+                <input id="name" type="text" formControlName="name" required>
                 <label for="name">Nombre</label>
               </div>
               <div class="input-field">
-                <input id="value" type="text" formControlName="value">
+                <input id="value" type="text" formControlName="value" required>
                 <label for="value">Precio</label>
               </div>
             </div>
+            <div class="card-action">
+                <button class="waves-effect waves-green btn" type="submit" [formGroup]="addItemForm" form="addItemFormDOM">Añadir item</button>
+              </div>
           </div>
         </form>
   </div>
   <div class="modal-footer">
-    <a href="#!" class="modal-close waves-effect waves-green btn-flat">Cancelar</a>
-    <button class="modal-close waves-effect waves-green btn-flat" type="submit" [formGroup]="addItemForm" form="addItemFormDOM">Guardar</button>
+    <a href="#!" class="modal-close waves-effect waves-green btn-flat">Cerrar</a>
   </div>
 </div>
 
@@ -175,40 +178,40 @@
         <div class="card-content" formGroupName="address">
           <span class="card-title">Dirección</span>
           <div class="input-field">
-            <select id="city" formControlName="city">
+            <select id="city" formControlName="city" >
               <option value="" disabled selected>Elige la Ciudad</option>
-              <option value="1">Aguascalientes</option>
-              <option value="2">Baja California</option>
-              <option value="3">Baja California Sur</option>
-              <option value="4">Campeche</option>
-              <option value="5">Coahuila de Zaragoza</option>
-              <option value="6">Colima</option>
-              <option value="7">Chiapas</option>
-              <option value="8">Chihuahua</option>
-              <option value="9">Distrito Federal</option>
-              <option value="10">Durango</option>
-              <option value="11">Guanajuato</option>
-              <option value="12">Guerrero</option>
-              <option value="13">Hidalgo</option>
-              <option value="14">Jalisco</option>
-              <option value="15">México</option>
-              <option value="16">Michoacán de Ocampo</option>
-              <option value="17">Morelos</option>
-              <option value="18">Nayarit</option>
-              <option value="19">Nuevo León</option>
-              <option value="20">Oaxaca</option>
-              <option value="21">Puebla</option>
-              <option value="22">Querétaro</option>
-              <option value="23">Quintana Roo</option>
-              <option value="24">San Luis Potosí</option>
-              <option value="25">Sinaloa</option>
-              <option value="26">Sonora</option>
-              <option value="27">Tabasco</option>
-              <option value="28">Tamaulipas</option>
-              <option value="29">Tlaxcala</option>
-              <option value="30">Veracruz de Ignacio de la Llave</option>
-              <option value="31">Yucatán</option>
-              <option value="32">Zacatecas</option>
+              <option value="Aguascalientes">Aguascalientes</option>
+              <option value="Baja California">Baja California</option>
+              <option value="Baja California Sur">Baja California Sur</option>
+              <option value="Campeche">Campeche</option>
+              <option value="Coahuila de Zaragoza">Coahuila de Zaragoza</option>
+              <option value="Colima">Colima</option>
+              <option value="Chiapas">Chiapas</option>
+              <option value="Chihuahua">Chihuahua</option>
+              <option value="Distrito Federal">Distrito Federal</option>
+              <option value="Durango">Durango</option>
+              <option value="Guanajuato">Guanajuato</option>
+              <option value="Guerrero">Guerrero</option>
+              <option value="Hidalgo">Hidalgo</option>
+              <option value="Jalisco">Jalisco</option>
+              <option value="México">México</option>
+              <option value="Michoacán de Ocampo">Michoacán de Ocampo</option>
+              <option value="Morelos">Morelos</option>
+              <option value="Nayarit">Nayarit</option>
+              <option value="Nuevo León">Nuevo León</option>
+              <option value="Oaxaca">Oaxaca</option>
+              <option value="Puebla">Puebla</option>
+              <option value="Querétaro">Querétaro</option>
+              <option value="Quintana Roo">Quintana Roo</option>
+              <option value="San Luis Potosí">San Luis Potosí</option>
+              <option value="Sinaloa">Sinaloa</option>
+              <option value="Sonora">Sonora</option>
+              <option value="Tabasco">Tabasco</option>
+              <option value="Tamaulipas">Tamaulipas</option>
+              <option value="Tlaxcala">Tlaxcala</option>
+              <option value="Veracruz de Ignacio de la Llave">Veracruz de Ignacio de la Llave</option>
+              <option value="Yucatán">Yucatán</option>
+              <option value="Zacatecas">Zacatecas</option>
             </select>
             <label for="city">Ciudad</label>
           </div>
@@ -225,7 +228,7 @@
             <label for="number">Número</label>
           </div>
           <div class="input-field">
-            <input id="cp" type="text" formControlName="cp">
+            <input id="cp" type="text" formControlName="pc">
             <label for="cp">Código Postal</label>
           </div>
           Coordenadas
@@ -261,7 +264,7 @@
 <div id="editOffice" class="modal modal-fixed-footer">
   <div class="modal-content">
     <h4>Editar Oficina</h4>
-    <form novalidate  id="editOfficeFormDOM" class="col s12" [formGroup]="addOfficeForm" (ngSubmit)="editOffice()">
+    <form novalidate id="editOfficeFormDOM" class="col s12" [formGroup]="editOfficeForm" (ngSubmit)="editOffice()">
       <div class="card">
         <div class="card-content ">
           <span class="card-title">Horario</span>
@@ -271,106 +274,106 @@
               <th>Apertura</th>
               <th>Cierre</th>
             </thead>
-            <tbody>
-              <tr>
+            <tbody formGroupName="schedule">
+              <tr formGroupName="lu">
                 <td>Lunes</td>
-                <td><input type="text" required class="timepicker" value="{{currentOffice.schedule.lu.substr(0,5)}}"></td>
-                <td><input type="text" required class="timepicker" value="{{currentOffice.schedule.lu.substr(6,10)}}"></td>
-              </tr>
-              <tr>
-                <td>Martes</td>
-                <td><input type="text" required class="timepicker" value="{{currentOffice.schedule.ma.substr(0,5)}}"></td>
-                <td><input type="text" required class="timepicker" value="{{currentOffice.schedule.ma.substr(6,10)}}"></td>
-              </tr>
-              <tr>
-                <td>Miécoles</td>
-                <td><input type="text" required class="timepicker" value="{{currentOffice.schedule.mi.substr(0,5)}}"></td>
-                <td><input type="text" required class="timepicker" value="{{currentOffice.schedule.mi.substr(6,10)}}"></td>
-              </tr>
-              <tr>
-                <td>Jueves</td>
-                <td><input type="text" required class="timepicker" value="{{currentOffice.schedule.ju.substr(0,5)}}"></td>
-                <td><input type="text" required class="timepicker" value="{{currentOffice.schedule.ju.substr(6,10)}}"></td>
-              </tr>
-              <tr>
-                <td>Viernes</td>
-                <td><input type="text" required class="timepicker" value="{{currentOffice.schedule.vi.substr(0,5)}}"></td>
-                <td><input type="text" required class="timepicker" value="{{currentOffice.schedule.vi.substr(6,10)}}"></td>
-              </tr>
-              <tr>
-                <td>Sábado</td>
-                <td><input type="text" required class="timepicker" value="{{currentOffice.schedule.sa.substr(0,5)}}"></td>
-                <td><input type="text" required class="timepicker" value="{{currentOffice.schedule.sa.substr(6,10)}}"></td>
-              </tr>
-              <tr>
-                <td>Domingo</td>
-                <td><input type="text" required class="timepicker" value="{{currentOffice.schedule.do.substr(0,5)}}"></td>
-                <td><input type="text" required class="timepicker" value="{{currentOffice.schedule.do.substr(6,10)}}"></td>
+                <td><input type="text" formControlName="init" required class="timepicker" ></td>
+                <td><input type="text" formControlName="end"  required class="timepicker" ></td>
+              </tr> 
+              <tr formGroupName="ma"> 
+                <td>Martes</td> 
+                <td><input type="text" formControlName="init" required class="timepicker" ></td>
+                <td><input type="text" formControlName="end"  required class="timepicker" ></td>
+              </tr> 
+              <tr formGroupName="mi"> 
+                <td>Miécoles</td> 
+                <td><input type="text" formControlName="init" required class="timepicker" ></td>
+                <td><input type="text" formControlName="end"  required class="timepicker" ></td>
+              </tr> 
+              <tr formGroupName="ju"> 
+                <td>Jueves</td> 
+                <td><input type="text" formControlName="init" required class="timepicker" ></td>
+                <td><input type="text" formControlName="end"  required class="timepicker" ></td>
+              </tr> 
+              <tr formGroupName="vi"> 
+                <td>Viernes</td> 
+                <td><input type="text" formControlName="init" required class="timepicker" ></td>
+                <td><input type="text" formControlName="end"  required class="timepicker" ></td>
+              </tr> 
+              <tr formGroupName="sa"> 
+                <td>Sábado</td> 
+                <td><input type="text" formControlName="init" required class="timepicker" ></td>
+                <td><input type="text" formControlName="end"  required class="timepicker" ></td>
+              </tr> 
+              <tr formGroupName="do"> 
+                <td>Domingo</td> 
+                <td><input type="text" formControlName="init" required class="timepicker" ></td>
+                <td><input type="text" formControlName="end"  required class="timepicker" ></td>
               </tr>
             </tbody>
           </table>
         </div>
       </div>
       <div class="card">
-        <div class="card-content">
+        <div class="card-content" formGroupName="address">
           <span class="card-title">Dirección</span>
           <div class="input-field">
-            <select id="city2" [value]="value">
-              <option value="1">Aguascalientes</option>
-              <option value="2">Baja California</option>
-              <option value="3">Baja California Sur</option>
-              <option value="4">Campeche</option>
-              <option value="5">Coahuila de Zaragoza</option>
-              <option value="6">Colima</option>
-              <option value="7">Chiapas</option>
-              <option value="8">Chihuahua</option>
-              <option value="9">Distrito Federal</option>
-              <option value="10">Durango</option>
-              <option value="11">Guanajuato</option>
-              <option value="12">Guerrero</option>
-              <option value="13">Hidalgo</option>
-              <option value="14">Jalisco</option>
-              <option value="15">México</option>
-              <option value="16">Michoacán de Ocampo</option>
-              <option value="17">Morelos</option>
-              <option value="18">Nayarit</option>
-              <option value="19">Nuevo León</option>
-              <option value="20">Oaxaca</option>
-              <option value="21">Puebla</option>
-              <option value="22">Querétaro</option>
-              <option value="23">Quintana Roo</option>
-              <option value="24">San Luis Potosí</option>
-              <option value="25">Sinaloa</option>
-              <option value="26">Sonora</option>
-              <option value="27">Tabasco</option>
-              <option value="28">Tamaulipas</option>
-              <option value="29">Tlaxcala</option>
-              <option value="30">Veracruz de Ignacio de la Llave</option>
-              <option value="31">Yucatán</option>
-              <option value="32">Zacatecas</option>
+            <select id="city2" formControlName="city">
+              <option value="Aguascalientes">Aguascalientes</option>
+              <option value="Baja California">Baja California</option>
+              <option value="Baja California Sur">Baja California Sur</option>
+              <option value="Campeche">Campeche</option>
+              <option value="Coahuila de Zaragoza">Coahuila de Zaragoza</option>
+              <option value="Colima">Colima</option>
+              <option value="Chiapas">Chiapas</option>
+              <option value="Chihuahua">Chihuahua</option>
+              <option value="Distrito Federal">Distrito Federal</option>
+              <option value="Durango">Durango</option>
+              <option value="Guanajuato">Guanajuato</option>
+              <option value="Guerrero">Guerrero</option>
+              <option value="Hidalgo">Hidalgo</option>
+              <option value="Jalisco">Jalisco</option>
+              <option value="México">México</option>
+              <option value="Michoacán de Ocampo">Michoacán de Ocampo</option>
+              <option value="Morelos">Morelos</option>
+              <option value="Nayarit">Nayarit</option>
+              <option value="Nuevo León">Nuevo León</option>
+              <option value="Oaxaca">Oaxaca</option>
+              <option value="Puebla">Puebla</option>
+              <option value="Querétaro">Querétaro</option>
+              <option value="Quintana Roo">Quintana Roo</option>
+              <option value="San Luis Potosí">San Luis Potosí</option>
+              <option value="Sinaloa">Sinaloa</option>
+              <option value="Sonora">Sonora</option>
+              <option value="Tabasco">Tabasco</option>
+              <option value="Tamaulipas">Tamaulipas</option>
+              <option value="Tlaxcala">Tlaxcala</option>
+              <option value="Veracruz de Ignacio de la Llave">Veracruz de Ignacio de la Llave</option>
+              <option value="Yucatán">Yucatán</option>
+              <option value="Zacatecas">Zacatecas</option>
             </select>
             <label for="city2">Ciudad</label>
           </div>
           <div class="input-field">
-            <input id="township2" placeholder="" type="text" value="{{currentOffice.address.township}}">
+            <input id="township2" placeholder="" type="text" formControlName="township">
             <label class="active" for="township2">Municipio</label>
           </div>
           <div class="input-field">
-            <input id="street2" placeholder="" type="text" value="{{currentOffice.address.street}}">
+            <input id="street2" placeholder="" type="text" formControlName="street">
             <label class="active" for="street2">Calle</label>
           </div>
           <div class="input-field">
-            <input id="number2" placeholder="" type="number" value="{{currentOffice.address.number}}">
+            <input id="number2" placeholder="" type="number" formControlName="number">
             <label for="number2">Número</label>
           </div>
           <div class="input-field">
-            <input id="cp2" placeholder="" type="text" value="{{currentOffice.address.pc}}">
+            <input id="cp2" placeholder="" type="text" formControlName="pc">
             <label for="cp2">Código Postal</label>
           </div>
           Coordenada
           <div class="form-group">
             <input type="text" placeholder="Search for Location" autocorrect="off" autocapitalize="off" spellcheck="off"
-              class="form-control" value="{{currentOffice.point.lat}}, {{currentOffice.point.long}}"#search>
+              class="form-control" value=""#search>
           </div>
           <agm-map [latitude]="lat" [longitude]="lng" [zoom]="zoom" (mapClick)="mapClicked($event)">
             <agm-marker [latitude]="point.lat" [longitude]="point.lng" [label]="point.label">
@@ -380,10 +383,10 @@
         </div>
       </div>
       <div class="card">
-        <div class="card-content">
+        <div class="card-content" formGroupName="data">
           <span class="card-title">Información de Usuario</span>
           <div class="input-field">
-            <input id="passwor2d" type="password">
+            <input id="passwor2d" type="password" formControlName="password">
             <label for="password2">Contraseña</label>
           </div>
         </div>
@@ -392,6 +395,6 @@
   </div>
   <div class="modal-footer">
     <a href="#!" class="modal-close waves-effect waves-green btn-flat">Cancelar</a>
-    <button class="waves-effect waves-green btn-flat" type="submit" [formGroup]="addOfficeForm" form="editOfficeFormDOM">Guardar</button>
+    <button class="waves-effect waves-green btn-flat" type="submit" [formGroup]="editOfficeForm" form="editOfficeFormDOM">Guardar</button>
   </div>
 </div>
